@@ -102,6 +102,3 @@ I deployed this app on Render. Here’s how I did it:
 - Could add a login system for users.
 - Maybe add filters to the dashboard.
 - Improve the email templates to make them look nicer.
-
-## Thanks
-I built this project with some help from my friend Grok—he was a big help! 😊 That’s all for now, let me know if you have any feedback!
