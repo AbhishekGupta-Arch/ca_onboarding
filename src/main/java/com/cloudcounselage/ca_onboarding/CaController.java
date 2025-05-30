@@ -25,14 +25,12 @@ public class CaController {
         try {
             CommunityAmbassador savedAmbassador = repository.save(ambassador);
             String utmLink = "https://www.industryacademiacommunity.com/?utm_source=ambassador&utm_medium=email&utm_campaign=" + savedAmbassador.getId();
-            System.out.println("Generated UTM Link: " + utmLink);
 
             UtmLink link = new UtmLink();
             link.setLink(utmLink);
             link.setAmbassadorId(savedAmbassador.getId());
             link.setClickCount(0);
             utmLinkRepository.save(link);
-            System.out.println("Saved UTM Link to database: " + utmLink);
 
             emailService.sendWelcomeEmail(ambassador.getEmail(), ambassador.getName(), utmLink);
             return "CA onboarded successfully! UTM link sent to " + ambassador.getEmail();

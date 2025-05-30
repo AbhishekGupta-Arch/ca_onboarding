@@ -1,0 +1,12 @@
+com\cloudcounselage\ca_onboarding\UtmLinkRepository.class
+com\cloudcounselage\ca_onboarding\CaOnboardingApplication.class
+com\cloudcounselage\ca_onboarding\CaController.class
+com\cloudcounselage\ca_onboarding\CustomErrorController.class
+com\cloudcounselage\ca_onboarding\AnalyticsController$PerformanceData.class
+com\cloudcounselage\ca_onboarding\AnalyticsController.class
+com\cloudcounselage\ca_onboarding\EmailService.class
+com\cloudcounselage\ca_onboarding\CommunityAmbassador.class
+com\cloudcounselage\ca_onboarding\UtmLink.class
+com\cloudcounselage\ca_onboarding\WebConfig.class
+com\cloudcounselage\ca_onboarding\CommunityAmbassadorRepository.class
+com\cloudcounselage\ca_onboarding\HomeController.class

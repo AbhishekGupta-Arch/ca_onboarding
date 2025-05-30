@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CA Onboarding</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #34495e;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #1abc9c;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #16a085;
+        }
+        .table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .table th {
+            background-color: #1abc9c;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f8ff;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+        }
+        .success {
+            color: #2ecc71;
+            font-size: 0.9rem;
+        }
+        .btn-secondary {
+            background-color: #3498db;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #2980b9;
+        }
+        .btn-dark-mode {
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            border: none;
+        }
+        .btn-dark-mode:hover {
+            background-color: #34495e;
+        }
+        .dark-mode {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+            color: #ecf0f1 !important;
+        }
+        .dark-mode .container {
+            background: #34495e !important;
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+        }
+        .dark-mode h1, .dark-mode h2, .dark-mode .form-label {
+            color: #ecf0f1 !important;
+        }
+        .dark-mode .table {
+            background: #3e4b5e !important;
+            color: #ecf0f1 !important;
+        }
+        .dark-mode .table th {
+            background-color: #1abc9c !important;
+        }
+        .dark-mode .table tbody tr:hover {
+            background-color: #4a596e !important;
+        }
+        .dark-mode input, .dark-mode .form-control {
+            background-color: #2c3e50 !important;
+            color: #ecf0f1 !important;
+            border-color: #4a596e !important;
+        }
+        .dark-mode .btn-dark-mode {
+            background-color: #ecf0f1 !important;
+            color: #2c3e50 !important;
+        }
+        .dark-mode .btn-dark-mode:hover {
+            background-color: #dfe6e9 !important;
+        }
+        .modal-content {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">New Joinee Form</h1>
+        <button class="btn btn-dark-mode" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </div>
+    <form id="onboardForm">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+    </form>
+    <p id="response" class="mt-3 text-center"></p>
+
+    <h2 class="text-center mt-5 mb-4">Performance Dashboard</h2>
+    <button onclick="loadDashboard()" class="btn btn-secondary mb-3">Refresh Dashboard</button>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>UTM Link</th>
+                <th>Clicks</th>
+            </tr>
+            </thead>
+            <tbody id="dashboardBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Form submitted successfully! Check your email for the welcome link.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+        const button = document.querySelector(".btn-dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+            button.innerHTML = "☀️ Light Mode";
+            localStorage.setItem("theme", "dark");
+        } else {
+            button.innerHTML = "🌙 Dark Mode";
+            localStorage.setItem("theme", "light");
+        }
+    }
+
+    window.onload = () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            document.querySelector(".btn-dark-mode").innerHTML = "☀️ Light Mode";
+        }
+        loadDashboard();
+    };
+
+    document.getElementById("onboardForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const responseElement = document.getElementById("response");
+
+        try {
+            const response = await fetch("/api/ca/onboard", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to onboard: " + response.statusText);
+            }
+
+            const result = await response.text();
+            responseElement.innerText = result;
+            responseElement.className = "success";
+
+            const successModal = new bootstrap.Modal(document.getElementById("successModal"));
+            successModal.show();
+
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            loadDashboard();
+        } catch (error) {
+            responseElement.innerText = error.message;
+            responseElement.className = "error";
+        }
+    });
+
+    async function loadDashboard() {
+        try {
+            const response = await fetch("/api/ca/performance");
+            if (!response.ok) {
+                throw new Error("Failed to load dashboard: " + response.statusText);
+            }
+            const data = await response.json();
+            const tbody = document.getElementById("dashboardBody");
+            tbody.innerHTML = "";
+            data.forEach(item => {
+                const row = `<tr>
+                        <td>${item.ambassadorName}</td>
+                        <td>${item.ambassadorEmail}</td>
+                        <td><a href="/api/utm/track?utmLink=${encodeURIComponent(item.utmLink)}" target="_blank">${item.utmLink}</a></td>
+                        <td>${item.clickCount}</td>
+                    </tr>`;
+                tbody.innerHTML += row;
+            });
+        } catch (error) {
+            console.error("Error loading dashboard:", error);
+            document.getElementById("dashboardBody").innerHTML = `<tr><td colspan="4">Error loading data: ${error.message}</td></tr>`;
+        }
+    }
+
+    setInterval(loadDashboard, 10000);
+</script>
+</body>
+</html>
