@@ -1,6 +1,6 @@
 # CA Onboarding - LinkBuddy Project
 
-Hey there! Welcome to my CA Onboarding project! This is a full-stack app I built for LinkBuddy using Spring Boot. It has a form where new joinees can enter their name and email, and they get a welcome email with a UTM link. The app tracks clicks on the UTM link and shows the data in a performance dashboard. I deployed it on Render with a PostgreSQL database. Pretty cool, right? 😄
+Hey there! Welcome to my CA Onboarding project! This is a full-stack app I built for LinkBuddy using Spring Boot. It has a form where new joinees can enter their name and email, and they get a welcome email with a UTM link. The app tracks clicks on the UTM link and shows the data in a performance dashboard. I deployed it on Render with a PostgreSQL database.
 
 ## Project Overview
 - **Tech Stack**:
